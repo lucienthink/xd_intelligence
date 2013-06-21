@@ -1,0 +1,27 @@
+<?php
+//软件学院
+//或得utf8格式网页内容
+$url="http://sc.xidian.edu.cn/";
+@$content=file_get_contents("http://sc.xidian.edu.cn");
+$content=iconv("gbk","utf-8",$content);
+$start=strpos($content,"学院新闻");
+$content=substr($content,$start);
+$end=strpos($content,"友情链接");
+$content=substr($content,0,$end);
+  preg_match_all('<a.+href=\"(.+)\".+target.+\>(.+)\</a>',$content,$info);
+$m->Insert("软件学院",$info[3],$url,$info[1],$info[2]);
+/*
+ * $i=0;
+$college=13;
+while(!empty($info[1][$i]))
+{
+    $time="";
+    $link=$url.$info[1][$i];
+    $content=$info[2][$i];
+    //把时间化为unix时间戳，把过期时间过滤掉
+    $i++;
+    insert($time,$college,$link,$content,"xd_colleges");
+}
+include_once("../close.php");
+ */
+?>

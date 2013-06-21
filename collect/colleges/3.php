@@ -1,0 +1,14 @@
+<?php
+//计算机学院
+//链接数据库
+//或得utf8格式网页内容
+$url="http://cs.xidian.edu.cn";
+@$content=file_get_contents("http://cs.xidian.edu.cn");
+$content=iconv("gbk","utf-8",$content);
+$start=strpos($content,"公告通知");
+$content=substr($content,$start);
+$end=strpos($content,"智能模糊搜索");
+$content=substr($content,0,$end);
+preg_match_all('<span.+(.+\-.+)</span.+a.+href=\"(.+)\">(.+)\<.a.+li>',$content,$info);
+$m->Insert("计算机学院",$info[1],$url,$info[2],$info[3]);
+?>

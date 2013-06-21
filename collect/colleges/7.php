@@ -1,0 +1,31 @@
+<?php
+//人文院
+$url="http://rwxy.xidian.edu.cn/";
+@$content=file_get_contents("http://rwxy.xidian.edu.cn");
+//或得utf8格式网页内容
+$content=iconv("gbk","utf-8",$content);
+$start=strpos($content,"sanjiao");
+$content=substr($content,$start);
+$end=strpos($content,"index_31");
+$content=substr($content,0,$end);
+  preg_match_all('<td.+align.+right.+\>(.+).+\</td>',$content,$date);
+  preg_match_all('<td.+width.+a.+href=\"(.+)\".+>',$content,$path);
+  $path=$m->replace1($path);
+  //preg_match_all('*(.+)\</a\>.+nbsp.+\</td\>*',$content,$info);
+  $content=str_replace("\n","",$content);
+  $content=str_replace("</a>&nbsp","\n",$content);
+  preg_match_all('*href.+bh.+\"\>(.+)*',$content,$info);
+$m->Insert("人文学院",$date[1],$url,$path[1],$info[1]);
+/*
+ * function replace1 ($path)
+{
+     $i=0;
+    while(!empty($path[1][$i]))
+    {
+    $path[1][$i]=str_replace("amp;","",$path[1][$i]);
+    $i++;
+    }
+    return $path;
+}
+ */
+?>

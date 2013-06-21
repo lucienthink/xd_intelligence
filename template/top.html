@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+
+--	头部页面
+--	Author: @lucien_think
+--	By lucien
+
+
+-->
+<html>
+	<head>		
+		<meta charset=utf-8>
+		<title>西电情报处</title>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script type="text/javascript" src="../js/jquery.js"></script>	
+		<!–[if lt IE9]> 
+		<script type="text/javascript" src="../js/html5.js"></script>
+		<![endif]–>
+		<script type="text/javascript">
+			function sch(){
+				if($("#sc_content").val()){
+		          		if($("#sc_content").val().match(/(\S+)/g)){
+		          			window.location.href = "/?m=search&s="+$('#sc_content').val();
+		          		}
+		          	}
+				
+			}
+			$(document).ready(function(){
+				$("#sc_content").keydown(function(event){
+		          if(event.which == 13) sch();	          
+		        });
+			});
+			
+		</script>
+	</head>
+	<body>
+		<header class="banner">
+			<div class="logo">
+				<h1><a href="/">西电情报处</a></h1>
+			</div>
+			<div class="nav">
+				<nav class="topnav">
+					<ul>
+						<li><a href="/?m=aboutus">ABOUT US</a></li>
+						<li><a href="/?m=contact">CONTACT US</a></li>
+					</ul>
+				</nav>
+				<nav class="listnav">
+					<ul>
+						<li><a href="/">首页</a></li>
+						<li><a href="/?m=colleges">学院信息</a></li>
+						<li><a href="/?m=univers">学校通知</a></li>
+						<li><a href="/?m=lab">实验室通知</a></li>
+						<li><a href="/?m=org">校内协会</a></li>
+						<li><a href="/?m=extra">校内热点</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="search">
+				<input type="text" id="sc_content">
+				<a href="javascript:sch();" id="sc">搜索</a>
+			</div>	
+		</header>

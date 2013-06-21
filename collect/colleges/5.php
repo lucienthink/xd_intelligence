@@ -1,0 +1,15 @@
+<?php
+//经济管理院
+//链接数据库
+//或得utf8格式网页内容
+$url="http://em.xidian.edu.cn";
+@$content=file_get_contents("http://em.xidian.edu.cn");
+$content=iconv("gbk","utf-8",$content);
+$start=strpos($content,"通知公告");
+$content=substr($content,$start);
+$end=strpos($content,"教工邮箱");
+$content=substr($content,0,$end);
+  preg_match_all('<td.+xian\".+\[(.+)\].+td>',$content,$date);
+  preg_match_all('<td.+xian.+a.+href=\"(.+)\"\>(.+)\</a>',$content,$info);
+$m->Insert("经济管理院",$date[1],$url."/",$info[1],$info[2]);
+?>
